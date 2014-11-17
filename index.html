@@ -32,12 +32,13 @@
 			savedFileEntry = entry;
 	      		var smallImage = document.getElementById('smallImage');
       			smallImage.style.display = 'block';
-			alert("FP: " + entry.fullPath);
+			alert("FP: " + entry.toURL());
 			var photos = document.getElementById("photos");
 			var prettyPicture = document.createElement("img");
 			prettyPicture.setAttribute("src", "file://" + entry.fullPath);
 			photos.append(prettyPicture);
-     			smallImage.src = "\"file://" + entry.fullPath + "\"";
+     			//smallImage.src = "\"file://" + entry.fullPath + "\"";
+			smallImage.src = entry.toURL();
 			//appStart();
 		},
 		function(err) {
