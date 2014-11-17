@@ -33,9 +33,11 @@
 	      		var smallImage = document.getElementById('smallImage');
       			smallImage.style.display = 'block';
 			alert("FP: " + entry.fullPath);
-			var photos = document.querySelector("#photos");
-			photos.append("<img src='file://"+path+"'>");
-     			smallImage.src = "file://" + entry.fullPath;
+			var photos = document.getElementById("photos");
+			var prettyPicture = document.createElement("img");
+			prettyPicture.setAttribute("src", "file://" + entry.fullPath;);
+			photos.append(prettyPicture);
+     			smallImage.src = "\"file://" + entry.fullPath + "\"";
 			//appStart();
 		},
 		function(err) {
@@ -118,6 +120,7 @@ function appStart() {
 
  	<img style="display:none;width:200px;height:200px;" id="smallImage" src="" />
 	<br><BR>
+	<h2>Photos</h2>
 	<div id="photos"></div>
   </body>
 </html>
