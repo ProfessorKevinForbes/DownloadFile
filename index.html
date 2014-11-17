@@ -21,7 +21,7 @@ function init() {
 
 	$status.innerHTML = "Checking for data file.";
 
-	store = cordova.file.dataDirectory;
+	//store = cordova.file.dataDirectory;
 
 	//Check for the file. 
 	//window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
@@ -36,7 +36,7 @@ function init() {
     }
 
     function gotFileEntryDownload(fileEntry) {
-        fileEntry.file(gotFileDownload fail);
+        fileEntry.file(gotFileDownload, fail);
     }
 
     function gotFileDownload(file){
