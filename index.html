@@ -57,7 +57,7 @@ function appStart() {
 
     function gotFSRead(fileSystem) {
 	var filename = "pikachu.jpg";
-        fileSystem.root.getFile(filename, null, gotFileEntryRead, fail);
+        fileSystem.root.getFile(store + filename, null, gotFileEntryRead, fail);
     }
 
     function gotFileEntryRead(fileEntry) {
