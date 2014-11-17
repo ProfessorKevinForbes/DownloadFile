@@ -42,11 +42,15 @@
 //I'm only called when the file exists or has been downloaded.
 function appStart() {
 	$status.innerHTML = "App ready!";
-	showFileText();
+	showImage();
 }
 
 
 //Read and Show Code
+
+    function showImage() {
+        savedFileEntry.file(gotFileRead, fail);
+    }
 
     function showFileText() {
 	alert("Show File Text");
