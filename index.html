@@ -47,9 +47,10 @@
 
 
 //I'm only called when the file exists or has been downloaded.
-function appStart() {
+function appStart(fileEntry) {
 	$status.innerHTML = "App ready!";
-	showImage();
+	//showImage();
+	gotFileEntryRead(fileEntry);
 }
 
 
