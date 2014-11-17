@@ -26,13 +26,41 @@ function init() {
 	//Check for the file. 
 	//window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSDownload, fail);
+	//window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSDownload, fail);
+	gotFSDownload();
 
 }
 
-    function gotFSDownload(fileSystem) {
+    function gotFSDownload() {
 	var filename = "pikachu.jpg";
-        fileSystem.root.getFile(filename, null, gotFileEntryDownload, fail);
+        //fileSystem.root.getFile(filename, null, gotFileEntryDownload, fail);
+
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+		function onFileSystemSuccess(fileSystem) {
+			fileSystem.root.getFile(
+			filename, {create: true, exclusive: false},
+				function gotFileEntry(fileEntry){
+					var sPath = fileEntry.fullPath;
+					var fileTransfer = new FileTransfer();
+					fileEntry.remove();
+					fileTransfer.download(
+						assetURL,
+						sPath,
+						function(theFile) {
+							alert("download complete: " + theFile.toURI());
+							appStart();
+						},
+						function(error) {
+							alert("download error source " + error.source);
+							alert("download error target " + error.target);
+							alert("upload error code: " + error.code);
+						}
+					);
+				},
+			fail);
+			},
+		fail);
+
     }
 
     function gotFileEntryDownload(fileEntry) {
