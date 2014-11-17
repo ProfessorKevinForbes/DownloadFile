@@ -92,6 +92,13 @@ function appStart() {
     }
 
 
+    function fail(error) {
+        alert("File Error:" + error.code);
+    }
+ 
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
 
     </script>
   </head>
