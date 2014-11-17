@@ -32,8 +32,9 @@
 			savedFileEntry = entry;
 	      		var smallImage = document.getElementById('smallImage');
       			smallImage.style.display = 'block';
+			alert("FP: " + entry.fullPath);
      			smallImage.src = entry.fullPath;
-			appStart();
+			//appStart();
 		},
 		function(err) {
 			alert("Error");
