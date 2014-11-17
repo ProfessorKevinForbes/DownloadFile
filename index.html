@@ -30,6 +30,9 @@
 		function(entry) {
 			alert("Success!");
 			savedFileEntry = entry;
+	      		var smallImage = document.getElementById('smallImage');
+      			smallImage.style.display = 'block';
+     			smallImage.src = entry.fullPath;
 			appStart();
 		},
 		function(err) {
