@@ -33,12 +33,17 @@
 	      		var smallImage = document.getElementById('smallImage');
       			smallImage.style.display = 'block';
 			alert("FP: " + entry.toURL());
-			var photos = document.getElementById("photos");
-			var prettyPicture = document.createElement("img");
-			prettyPicture.setAttribute("src", "file://" + entry.fullPath);
-			photos.append(prettyPicture);
      			//smallImage.src = "\"file://" + entry.fullPath + "\"";
 			smallImage.src = entry.toURL();
+
+
+var elem = document.createElement("img");
+elem.src = entry.toURL();
+elem.setAttribute("height", "200");
+elem.setAttribute("width", "200");
+elem.setAttribute("alt", "Pikachu");
+document.getElementById("photos").appendChild(elem);
+
 			//appStart();
 		},
 		function(err) {
