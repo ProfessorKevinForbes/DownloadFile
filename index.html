@@ -36,14 +36,14 @@ function init() {
     }
 
     function gotFileEntryDownload(fileEntry) {
-        fileEntry.file(gotFileDownload, fail);
-    }
+        //fileEntry.file(gotFileDownload, fail);
+    //}
 
-    function gotFileDownload(file){
+    //function gotFileDownload(file){
         
 	var fileTransfer = new FileTransfer();
 	alert("About to start transfer");
-	fileTransfer.download(assetURL, file.fullPath, 
+	fileTransfer.download(assetURL, fileEntry.fullPath, 
 		function(entry) {
 			alert("Success!");
 			appStart();
