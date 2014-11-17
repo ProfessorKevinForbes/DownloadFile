@@ -33,17 +33,10 @@
 	      		var smallImage = document.getElementById('smallImage');
       			smallImage.style.display = 'block';
 			alert("FP: " + entry.toURL());
-     			//smallImage.src = "\"file://" + entry.fullPath + "\"";
-			smallImage.src = entry.toURL();
+     			smallImage.src = entry.toURL();
 
 
-/*var elem = document.createElement("img");
-elem.src = entry.toURL();
-elem.setAttribute("height", "200");
-elem.setAttribute("width", "200");
-elem.setAttribute("alt", "Pikachu");
-document.getElementById("photos").appendChild(elem);
-*/
+			$status.innerHTML = "App ready!";
 			//appStart();
 		},
 		function(err) {
@@ -63,48 +56,19 @@ function appStart() {
 //Read and Show Code
 
     function showImage() {
-        savedFileEntry.file(gotFileRead, fail);
-    }
-
-    function showFileText() {
-	alert("Show File Text");
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSRead, fail);
     }
 
     function gotFSRead(fileSystem) {
 	var filename = "pikachu.jpg";
-        fileSystem.root.getFile(filename, null, gotFileEntryRead, fail);
+        fileSystem.root.getFile(store + filename, null, gotFileEntryRead, fail);
     }
 
-    function gotFileEntryRead(fileEntry) {
-        fileEntry.file(gotFileRead, fail);
-    }
-
-    function gotFileRead(file){
-        
-        readAsText(file);
-    }
-
-    function readAsText(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(evt) {
-	    var value = evt.target.result;
-	    onPhotoDataSuccess(value);
-        };
-        reader.readAsText(file);
-    }
-
-
-//Photo Code
-
-    function onPhotoDataSuccess(imageData2) {
-      imageData = imageData2;
-
-      var smallImage = document.getElementById('smallImage');
-      smallImage.style.display = 'block';
-      smallImage.src = "data:image/jpeg;base64," + imageData2;
-
-
+    function gotFileEntryRead(entry) {
+	var smallImage = document.getElementById('smallImage');
+      	smallImage.style.display = 'block';
+	alert("FP: " + entry.toURL());
+     	smallImage.src = entry.toURL();
     }
 
 
@@ -125,8 +89,5 @@ function appStart() {
 	<br><BR>
 
  	<img style="display:none;width:200px;height:200px;" id="smallImage" src="" />
-	<br><BR>
-	<h2>Photos</h2>
-	<div id="photos"></div>
   </body>
 </html>
