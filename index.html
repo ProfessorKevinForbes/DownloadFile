@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Download File App</title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+   document.addEventListener("deviceready", init, false);
+
+   var store;
+   var $status;
+   var assetURL = "http://images5.fanpop.com/image/photos/28400000/pikachu-pokeball-pika-pika-pikachu-28484068-200-175.jpg";
+
+
+   var fileName = "pikachu.jpg";
+
+function init() {
+	
+	$status = document.querySelector("#status");
+
+	$status.innerHTML = "Checking for data file.";
+
+	store = cordova.file.dataDirectory;
+
+	//Check for the file. 
+	window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
+}
+
+function downloadAsset() {
+	var fileTransfer = new FileTransfer();
+	alert("About to start transfer");
+	fileTransfer.download(assetURL, store + fileName, 
+		function(entry) {
+			alert("Success!");
+			appStart();
+		}, 
+		function(err) {
+			alert("Error");
+			console.dir(err);
+		});
+}
+
+//I'm only called when the file exists or has been downloaded.
+function appStart() {
+	$status.innerHTML = "App ready!";
+	showFileText();
+}
+
+
+//Read and Show Code
+
+    function showFileText() {
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSRead, fail);
+    }
+
+    function gotFSRead(fileSystem) {
+	var filename = "pikachu.jpg";
+        fileSystem.root.getFile(filename, null, gotFileEntryRead, fail);
+    }
+
+    function gotFileEntryRead(fileEntry) {
+        fileEntry.file(gotFileRead, fail);
+    }
+
+    function gotFileRead(file){
+        
+        readAsText(file);
+    }
+
+    function readAsText(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+	    var value = evt.target.result;
+	    onPhotoDataSuccess(value);
+        };
+        reader.readAsText(file);
+    }
+
+
+//Photo Code
+
+    function onPhotoDataSuccess(imageData2) {
+      imageData = imageData2;
+
+      var smallImage = document.getElementById('smallImage');
+      smallImage.style.display = 'block';
+      smallImage.src = "data:image/jpeg;base64," + imageData2;
+
+
+    }
+
+
+
+    </script>
+  </head>
+  <body>
+
+	<h2>Download File App</h2>
+	<div id="status"></div>
+	<br><BR>
+
+ 	<img style="display:none;width:200px;height:200px;" id="smallImage" src="" />
+
+  </body>
+</html>
